@@ -39,7 +39,7 @@ export function ThirdLawLab({ mode, questions, responses, onSubmitResponse, data
 
   useEffect(() => {
     if (!running) {
-      lastFrameRef.current = undefined;
+      lastFrameRef.current = null;
       return undefined;
     }
 

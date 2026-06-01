@@ -55,7 +55,7 @@ export function SecondLawLab({
 
   useEffect(() => {
     if (!running) {
-      lastFrameRef.current = undefined;
+      lastFrameRef.current = null;
       setSim((current) => ({
         ...current,
         acceleration: currentPhysics.acceleration,
