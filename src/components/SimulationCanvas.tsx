@@ -1,0 +1,116 @@
+export interface CartVisual {
+  id: string;
+  label: string;
+  position: number;
+  color: string;
+  width?: number;
+}
+
+export interface ArrowVisual {
+  id: string;
+  label: string;
+  start: number;
+  direction: -1 | 1;
+  magnitude: number;
+  color: string;
+  y?: number;
+}
+
+interface SimulationCanvasProps {
+  title: string;
+  carts: CartVisual[];
+  arrows?: ArrowVisual[];
+}
+
+function clamp01(value: number) {
+  return Math.max(0.04, Math.min(0.96, value));
+}
+
+export function SimulationCanvas({ title, carts, arrows = [] }: SimulationCanvasProps) {
+  const width = 720;
+  const height = 240;
+  const trackLeft = 64;
+  const trackRight = 656;
+  const trackY = 158;
+
+  const mapX = (position: number) => trackLeft + clamp01(position) * (trackRight - trackLeft);
+
+  return (
+    <section className="rounded-lg border border-slate-200 bg-white p-4">
+      <h3 className="mb-2 text-sm font-black uppercase tracking-wide text-slate-700">{title}</h3>
+      <svg viewBox={`0 0 ${width} ${height}`} className="h-auto w-full" role="img" aria-label={title}>
+        <rect x="0" y="0" width={width} height={height} rx="12" fill="#f8fafc" />
+        <line x1={trackLeft} x2={trackRight} y1={trackY} y2={trackY} stroke="#334155" strokeWidth="8" />
+        <line x1={trackLeft} x2={trackRight} y1={trackY + 22} y2={trackY + 22} stroke="#cbd5e1" strokeWidth="5" />
+        {[0, 0.25, 0.5, 0.75, 1].map((tick) => (
+          <g key={tick}>
+            <line
+              x1={trackLeft + tick * (trackRight - trackLeft)}
+              x2={trackLeft + tick * (trackRight - trackLeft)}
+              y1={trackY + 9}
+              y2={trackY + 34}
+              stroke="#94a3b8"
+              strokeWidth="2"
+            />
+          </g>
+        ))}
+
+        <defs>
+          {arrows.map((arrow) => (
+            <marker
+              key={arrow.id}
+              id={`arrow-${arrow.id}`}
+              markerWidth="12"
+              markerHeight="12"
+              refX="10"
+              refY="6"
+              orient="auto"
+            >
+              <path d="M2,2 L10,6 L2,10 Z" fill={arrow.color} />
+            </marker>
+          ))}
+        </defs>
+
+        {arrows.map((arrow) => {
+          const x1 = mapX(arrow.start);
+          const length = Math.max(20, Math.min(135, Math.abs(arrow.magnitude) * 10));
+          const x2 = x1 + arrow.direction * length;
+          const y = arrow.y ?? 78;
+          return (
+            <g key={arrow.id}>
+              <line
+                x1={x1}
+                x2={x2}
+                y1={y}
+                y2={y}
+                stroke={arrow.color}
+                strokeWidth="6"
+                strokeLinecap="round"
+                markerEnd={`url(#arrow-${arrow.id})`}
+              />
+              <text x={(x1 + x2) / 2} y={y - 12} textAnchor="middle" fill={arrow.color} fontSize="15" fontWeight="700">
+                {arrow.label}
+              </text>
+            </g>
+          );
+        })}
+
+        {carts.map((cart) => {
+          const cartWidth = cart.width ?? 74;
+          const x = mapX(cart.position) - cartWidth / 2;
+          return (
+            <g key={cart.id}>
+              <rect x={x} y={trackY - 48} width={cartWidth} height="38" rx="8" fill={cart.color} />
+              <rect x={x + 8} y={trackY - 43} width={cartWidth - 16} height="10" rx="4" fill="rgba(255,255,255,0.35)" />
+              <circle cx={x + 18} cy={trackY - 4} r="10" fill="#172026" />
+              <circle cx={x + cartWidth - 18} cy={trackY - 4} r="10" fill="#172026" />
+              <text x={x + cartWidth / 2} y={trackY - 60} textAnchor="middle" fill="#172026" fontSize="16" fontWeight="800">
+                {cart.label}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </section>
+  );
+}

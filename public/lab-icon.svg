@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Physics lab icon">
+  <rect width="128" height="128" rx="24" fill="#f7f9fc"/>
+  <path d="M24 88h80" stroke="#172026" stroke-width="8" stroke-linecap="round"/>
+  <rect x="36" y="54" width="34" height="24" rx="6" fill="#2563eb"/>
+  <circle cx="46" cy="84" r="8" fill="#172026"/>
+  <circle cx="62" cy="84" r="8" fill="#172026"/>
+  <path d="M76 61h22m0 0-9-9m9 9-9 9" stroke="#d97706" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M29 35c12-9 25-9 37 0s24 9 36 0" fill="none" stroke="#0f766e" stroke-width="7" stroke-linecap="round"/>
+</svg>
