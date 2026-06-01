@@ -30,8 +30,8 @@ export function FirstLawLab({ mode, questions, responses, onSubmitResponse, data
   const [frictionEnabled, setFrictionEnabled] = useState(false);
   const [frictionStrength, setFrictionStrength] = useState(0.5);
   const [sim, setSim] = useState<FirstLawState>(initialState);
-  const frameRef = useRef<number>();
-  const lastFrameRef = useRef<number>();
+  const frameRef = useRef<number | null>(null);
+  const lastFrameRef = useRef<number | null>(null);
   const pushRemainingRef = useRef(0);
   const sampleAtRef = useRef(0);
 

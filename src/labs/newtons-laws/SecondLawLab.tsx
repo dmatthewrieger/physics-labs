@@ -44,8 +44,8 @@ export function SecondLawLab({
   const [mu, setMu] = useState(0.12);
   const [running, setRunning] = useState(false);
   const [sim, setSim] = useState<SecondLawState>(initialState);
-  const frameRef = useRef<number>();
-  const lastFrameRef = useRef<number>();
+  const frameRef = useRef<number | null>(null);
+  const lastFrameRef = useRef<number | null>(null);
   const sampleAtRef = useRef(0);
 
   const currentPhysics = useMemo(

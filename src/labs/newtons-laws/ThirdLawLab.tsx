@@ -33,8 +33,8 @@ export function ThirdLawLab({ mode, questions, responses, onSubmitResponse, data
   const [compression, setCompression] = useState(0.8);
   const [running, setRunning] = useState(false);
   const [sim, setSim] = useState<ThirdLawState>(initialState);
-  const frameRef = useRef<number>();
-  const lastFrameRef = useRef<number>();
+  const frameRef = useRef<number | null>(null);
+  const lastFrameRef = useRef<number | null>(null);
   const sampleAtRef = useRef(0);
 
   useEffect(() => {
