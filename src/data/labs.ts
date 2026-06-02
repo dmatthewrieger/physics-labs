@@ -1,8 +1,7 @@
 import { LabMetadata } from "../types/labTypes";
 
 export const labs: LabMetadata[] = [
-  // Future labs become visible in the library by adding metadata here and registering
-  // their component in App.tsx or a dedicated lab router.
+  // Lab metadata controls the library cards and the available lab router.
   {
     id: "newtons-laws",
     title: "Newton's Laws Virtual Lab",
@@ -31,7 +30,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Projectile Motion",
     description: "Explore horizontal and vertical motion for objects launched through the air.",
     topics: ["Kinematics", "Vectors"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -40,7 +40,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Work and Energy",
     description: "Connect forces, displacement, kinetic energy, and conservation of energy.",
     topics: ["Energy", "Work"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -49,7 +50,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Momentum",
     description: "Model collisions and compare momentum before and after interactions.",
     topics: ["Momentum", "Collisions"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -58,7 +60,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Rotation",
     description: "Study angular velocity, angular acceleration, torque, and moment of inertia.",
     topics: ["Rotation", "Torque"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -67,7 +70,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Equilibrium",
     description: "Balance forces and torques in bridges, beams, and hanging systems.",
     topics: ["Statics", "Torque"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -76,7 +80,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "SHM",
     description: "Measure periods, amplitudes, restoring forces, and oscillatory motion.",
     topics: ["Oscillations", "Springs"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -85,7 +90,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Fluids",
     description: "Investigate buoyancy, pressure, continuity, and fluid flow.",
     topics: ["Fluids", "Pressure"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -94,7 +100,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Electric Fields",
     description: "Map electric fields and potentials for point charges and charge distributions.",
     topics: ["Electricity", "Fields"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -103,7 +110,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "DC Circuits",
     description: "Build series and parallel circuits and measure voltage, current, and resistance.",
     topics: ["Circuits", "Electricity"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -112,7 +120,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Magnetism",
     description: "Explore magnetic fields, forces on moving charges, and electromagnetic effects.",
     topics: ["Magnetism", "Fields"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -121,7 +130,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Waves",
     description: "Connect frequency, wavelength, interference, resonance, and sound intensity.",
     topics: ["Waves", "Sound"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -130,7 +140,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Optics",
     description: "Model lenses, mirrors, refraction, and image formation.",
     topics: ["Light", "Optics"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {
@@ -139,7 +150,8 @@ export const labs: LabMetadata[] = [
     shortTitle: "Modern Physics",
     description: "Explore photons, atomic spectra, quantum models, and nuclear processes.",
     topics: ["Quantum", "Atomic physics"],
-    status: "coming-soon",
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
 ];

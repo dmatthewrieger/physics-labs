@@ -2,7 +2,7 @@
 
 Interactive simulations and guided virtual labs for online college physics courses.
 
-This repository is a production-ready prototype for a GitHub-hosted physics lab library. It includes reusable lab infrastructure and currently implements **Newton's Laws Virtual Lab** and **One-Dimensional Kinematics Lab**.
+This repository is a production-ready prototype for a GitHub-hosted physics lab library. It includes reusable lab infrastructure and currently implements a full introductory physics lab sequence.
 
 ## Project Overview
 
@@ -29,9 +29,7 @@ The app is designed as a client-side Vite/React application that can be deployed
 - Prediction questions before each experiment
 - Data tables, graph interpretation prompts, final reflection, and lab report output
 
-## Future Lab Library Vision
-
-The library page already includes placeholder cards for:
+The following configured labs are also available:
 
 - Projectile Motion Lab
 - Work and Energy Lab
@@ -47,7 +45,7 @@ The library page already includes placeholder cards for:
 - Optics Lab
 - Modern Physics Lab
 
-Only Newton's Laws is clickable in this prototype. Future labs can reuse the same course-mode selection, lab layout, progress tracker, question cards, graph panels, data tables, free-body diagrams, and report generator.
+Each configured lab includes algebra/trig and calculus modes, three guided investigations, prediction questions before experimentation, adjustable controls, computed readouts, graphs, data tables, analysis questions, final reflection, and report output.
 
 ## Tech Stack
 
@@ -110,11 +108,10 @@ This value should match the repository name, so it is already configured for `ht
 ## How to Add a New Lab
 
 1. Add lab metadata to `src/data/labs.ts`.
-2. Create a new folder under `src/labs/`, for example `src/labs/projectile-motion/`.
-3. Create the lab component and any lab-specific question, physics, or type files.
-4. Register the component in `src/App.tsx` or move lab selection into a dedicated lab router.
-5. Add mode-specific question sets for `algebra-trig` and `calculus`.
-6. Reuse shared components from `src/components/` for layout, progress, questions, graphs, tables, diagrams, and reports.
+2. For a configured lab, add the lab model to `src/labs/configured/configuredLabData.ts`.
+3. For a highly custom lab, create a folder under `src/labs/` and register the component in `src/App.tsx`.
+4. Add mode-specific question sets for `algebra-trig` and `calculus`.
+5. Reuse shared components from `src/components/` for layout, progress, questions, graphs, tables, diagrams, and reports.
 
 ## Folder Structure
 
@@ -148,6 +145,10 @@ physics-labs/
       QuestionCard.tsx
       SimulationCanvas.tsx
     labs/
+      configured/
+        ConfiguredPhysicsLab.tsx
+        configuredLabData.ts
+        configuredLabTypes.ts
       newtons-laws/
         FirstLawLab.tsx
         NewtonsLawsLab.tsx
@@ -156,6 +157,11 @@ physics-labs/
         newtonsPhysics.ts
         newtonsQuestions.ts
         newtonsTypes.ts
+      one-dimensional-kinematics/
+        OneDimensionalKinematicsLab.tsx
+        kinematicsPhysics.ts
+        kinematicsQuestions.ts
+        kinematicsTypes.ts
   index.html
   package.json
   postcss.config.js
@@ -168,7 +174,7 @@ physics-labs/
 
 - Short-answer feedback uses simple keyword matching rather than natural-language grading.
 - Data is stored in React state only; refreshing the browser clears progress.
-- The friction model is intentionally introductory and one-dimensional.
+- The physics models are intentionally introductory and idealized.
 - The report is generated client-side and is not submitted to an LMS.
 
 ## Future Improvements
@@ -176,5 +182,4 @@ physics-labs/
 - Add persistence through local storage or LMS integration.
 - Add export options for CSV data tables.
 - Add instructor-authored rubrics and grading keys.
-- Expand the registry into a full lab router.
-- Implement the placeholder labs one at a time using the shared infrastructure.
+- Add richer custom visualizations for each configured lab.

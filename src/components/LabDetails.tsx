@@ -26,11 +26,11 @@ const labPaths: Record<string, string[]> = {
 
 export function LabDetails({ lab, onBack, onChooseMode }: LabDetailsProps) {
   const pathItems = labPaths[lab.id] ?? [
-    "1. Introduction",
-    "2. Guided simulation",
-    "3. Data and graphs",
-    "4. Reflection",
-    "5. Lab report",
+    "1. Introduction and learning objectives",
+    "2. Investigation 1: prediction, controls, data, and graph",
+    "3. Investigation 2: prediction, controls, data, and graph",
+    "4. Investigation 3: prediction, controls, data, and graph",
+    "5. Final reflection and lab report",
   ];
 
   return (

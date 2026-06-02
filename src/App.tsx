@@ -4,6 +4,7 @@ import { LabDetails } from "./components/LabDetails";
 import { LabLibrary } from "./components/LabLibrary";
 import { ModeSelector } from "./components/ModeSelector";
 import { CourseMode } from "./types/labTypes";
+import { ConfiguredPhysicsLab } from "./labs/configured/ConfiguredPhysicsLab";
 import { NewtonsLawsLab } from "./labs/newtons-laws/NewtonsLawsLab";
 import { OneDimensionalKinematicsLab } from "./labs/one-dimensional-kinematics/OneDimensionalKinematicsLab";
 
@@ -47,6 +48,17 @@ export default function App() {
   if (selectedLabId === "one-dimensional-kinematics") {
     return (
       <OneDimensionalKinematicsLab
+        mode={mode}
+        onBackToLibrary={() => setScreen("library")}
+        onChangeMode={() => setScreen("mode")}
+      />
+    );
+  }
+
+  if (selectedLabId !== "newtons-laws") {
+    return (
+      <ConfiguredPhysicsLab
+        labId={selectedLabId}
         mode={mode}
         onBackToLibrary={() => setScreen("library")}
         onChangeMode={() => setScreen("mode")}
