@@ -14,6 +14,8 @@ export interface ArrowVisual {
   magnitude: number;
   color: string;
   y?: number;
+  labelDx?: number;
+  labelDy?: number;
 }
 
 interface SimulationCanvasProps {
@@ -32,6 +34,8 @@ export function SimulationCanvas({ title, carts, arrows = [] }: SimulationCanvas
   const trackLeft = 64;
   const trackRight = 656;
   const trackY = 158;
+  const arrowHeadLength = 24;
+  const arrowHeadHalfHeight = 10;
 
   const mapX = (position: number) => trackLeft + clamp01(position) * (trackRight - trackLeft);
 
@@ -55,41 +59,29 @@ export function SimulationCanvas({ title, carts, arrows = [] }: SimulationCanvas
           </g>
         ))}
 
-        <defs>
-          {arrows.map((arrow) => (
-            <marker
-              key={arrow.id}
-              id={`arrow-${arrow.id}`}
-              markerUnits="userSpaceOnUse"
-              markerWidth="26"
-              markerHeight="24"
-              refX="24"
-              refY="12"
-              orient="auto"
-            >
-              <path d="M1,2 L24,12 L1,22 Z" fill={arrow.color} />
-            </marker>
-          ))}
-        </defs>
-
         {arrows.map((arrow) => {
           const x1 = mapX(arrow.start);
-          const length = Math.max(20, Math.min(135, Math.abs(arrow.magnitude) * 10));
-          const x2 = x1 + arrow.direction * length;
+          const length = Math.max(48, Math.min(135, Math.abs(arrow.magnitude) * 10));
+          const tipX = x1 + arrow.direction * length;
+          const baseX = tipX - arrow.direction * arrowHeadLength;
           const y = arrow.y ?? 78;
+          const labelX = (x1 + baseX) / 2 + (arrow.labelDx ?? 0);
+          const labelY = y - 18 + (arrow.labelDy ?? 0);
+          const headPoints = `${tipX},${y} ${baseX},${y - arrowHeadHalfHeight} ${baseX},${y + arrowHeadHalfHeight}`;
+
           return (
             <g key={arrow.id}>
               <line
                 x1={x1}
-                x2={x2}
+                x2={baseX}
                 y1={y}
                 y2={y}
                 stroke={arrow.color}
                 strokeWidth="4.5"
                 strokeLinecap="round"
-                markerEnd={`url(#arrow-${arrow.id})`}
               />
-              <text x={(x1 + x2) / 2} y={y - 12} textAnchor="middle" fill={arrow.color} fontSize="15" fontWeight="700">
+              <polygon points={headPoints} fill={arrow.color} />
+              <text x={labelX} y={labelY} textAnchor="middle" fill={arrow.color} fontSize="15" fontWeight="700">
                 {arrow.label}
               </text>
             </g>
@@ -105,7 +97,7 @@ export function SimulationCanvas({ title, carts, arrows = [] }: SimulationCanvas
               <rect x={x + 8} y={trackY - 43} width={cartWidth - 16} height="10" rx="4" fill="rgba(255,255,255,0.35)" />
               <circle cx={x + 18} cy={trackY - 4} r="10" fill="#172026" />
               <circle cx={x + cartWidth - 18} cy={trackY - 4} r="10" fill="#172026" />
-              <text x={x + cartWidth / 2} y={trackY - 60} textAnchor="middle" fill="#172026" fontSize="16" fontWeight="800">
+              <text x={x + cartWidth / 2} y={trackY - 23} textAnchor="middle" fill="#ffffff" fontSize="14" fontWeight="800">
                 {cart.label}
               </text>
             </g>
