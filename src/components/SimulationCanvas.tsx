@@ -61,13 +61,13 @@ export function SimulationCanvas({ title, carts, arrows = [] }: SimulationCanvas
               key={arrow.id}
               id={`arrow-${arrow.id}`}
               markerUnits="userSpaceOnUse"
-              markerWidth="9"
-              markerHeight="9"
-              refX="8"
-              refY="4.5"
+              markerWidth="26"
+              markerHeight="24"
+              refX="24"
+              refY="12"
               orient="auto"
             >
-              <path d="M1,1 L8,4.5 L1,8 Z" fill={arrow.color} />
+              <path d="M1,2 L24,12 L1,22 Z" fill={arrow.color} />
             </marker>
           ))}
         </defs>

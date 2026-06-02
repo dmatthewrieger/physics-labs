@@ -35,13 +35,13 @@ export function FreeBodyDiagram({ title, objectLabel, forces }: FreeBodyDiagramP
               key={`${force.label}-${index}`}
               id={`${title.replace(/\s+/g, "-")}-${index}`}
               markerUnits="userSpaceOnUse"
-              markerWidth="8"
-              markerHeight="8"
-              refX="7"
-              refY="4"
+              markerWidth="22"
+              markerHeight="20"
+              refX="20"
+              refY="10"
               orient="auto"
             >
-              <path d="M1,1 L7,4 L1,7 Z" fill={force.color} />
+              <path d="M1,2 L20,10 L1,18 Z" fill={force.color} />
             </marker>
           ))}
         </defs>
