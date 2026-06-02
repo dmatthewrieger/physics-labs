@@ -600,7 +600,7 @@ const shmLab: ConfiguredLab = {
       const omega = 2 * Math.PI * frequency;
       const rows = rowsFromFunction(16, (i) => `${round(i / 8, 2)} s`, (i) => i / 8, (i) => amplitude * Math.cos(omega * (i / 8)), (i) => -amplitude * omega * Math.sin(omega * (i / 8)), (i) => -amplitude * omega ** 2 * Math.cos(omega * (i / 8)));
       return result(rows, [metric("Max speed", amplitude * omega, "m/s"), metric("Max acceleration", amplitude * omega ** 2, "m/s^2"), metric("Period", 1 / frequency, "s")], "SHM position over time", "time (s)", "position (m)", "position", "velocity", "acceleration");
-    }, "sinusoidal motion", ["position", "velocity", "acceleration"], ["derivative", "second derivative", "sinusoidal"], "Velocity and acceleration are tied to the changing slope and curvature of position.");
+    }, "sinusoidal motion", ["position", "velocity", "acceleration"], ["derivative", "second derivative", "sinusoidal"], "Velocity and acceleration are tied to the changing slope and curvature of position."),
   ],
   reflectionQuestions: reflectionQuestions("shm", "Simple Harmonic Motion Lab", ["period", "amplitude", "spring"], ["differential", "omega", "energy"]),
   conclusionScaffold:
@@ -633,7 +633,7 @@ const fluidsLab: ConfiguredLab = {
       const speed2 = flow / area2;
       const rows = rowsFromFunction(8, (i) => `${round(0.1 + i * 0.2, 2)} m^2`, (i) => 0.1 + i * 0.2, (i) => flow / (0.1 + i * 0.2));
       return result(rows, [metric("Flow rate", flow, "m^3/s"), metric("Speed 2", speed2, "m/s"), metric("Area ratio", area1 / area2, "")], "Outlet speed vs. outlet area", "area 2 (m^2)", "speed 2 (m/s)", "speed");
-    }, "flow speed", ["area", "speed", "flow"], ["continuity", "flux", "flow rate"], "For incompressible flow, smaller area produces greater speed.");
+    }, "flow speed", ["area", "speed", "flow"], ["continuity", "flux", "flow rate"], "For incompressible flow, smaller area produces greater speed."),
   ],
   reflectionQuestions: reflectionQuestions("fluids", "Fluids Lab", ["pressure", "buoyancy", "flow"], ["gradient", "flux", "displaced"]),
   conclusionScaffold:
