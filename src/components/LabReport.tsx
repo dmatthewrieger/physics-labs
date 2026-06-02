@@ -14,6 +14,7 @@ interface LabReportProps {
   questions: LabQuestion[];
   responses: QuestionResponse[];
   tables: ReportTable[];
+  conclusionScaffold?: string;
 }
 
 function buildReportText(
@@ -24,6 +25,7 @@ function buildReportText(
   questions: LabQuestion[],
   responses: QuestionResponse[],
   tables: ReportTable[],
+  conclusionScaffold?: string,
 ) {
   const responseMap = new Map(responses.map((response) => [response.questionId, response]));
   const lines = [
@@ -61,7 +63,8 @@ function buildReportText(
   lines.push(
     "",
     "Conclusion scaffold:",
-    `${studentName || "The student"} investigated Newton's Laws by comparing motion when net force was zero, measuring how acceleration changed with net force and mass, and analyzing equal-and-opposite interaction forces. The collected evidence supports the conclusion that net force changes motion, acceleration depends on both force and mass, and action-reaction forces act on different objects.`,
+    conclusionScaffold ??
+      `${studentName || "The student"} investigated Newton's Laws by comparing motion when net force was zero, measuring how acceleration changed with net force and mass, and analyzing equal-and-opposite interaction forces. The collected evidence supports the conclusion that net force changes motion, acceleration depends on both force and mass, and action-reaction forces act on different objects.`,
   );
 
   return lines.join("\n");
@@ -74,16 +77,28 @@ export function LabReport({
   questions,
   responses,
   tables,
+  conclusionScaffold,
 }: LabReportProps) {
   const [studentName, setStudentName] = useState("");
   const [copyStatus, setCopyStatus] = useState("");
 
   const reportText = useMemo(
-    () => buildReportText(studentName, labTitle, modeLabel, completedSections, questions, responses, tables),
-    [studentName, labTitle, modeLabel, completedSections, questions, responses, tables],
+    () =>
+      buildReportText(
+        studentName,
+        labTitle,
+        modeLabel,
+        completedSections,
+        questions,
+        responses,
+        tables,
+        conclusionScaffold,
+      ),
+    [studentName, labTitle, modeLabel, completedSections, questions, responses, tables, conclusionScaffold],
   );
 
   const download = (type: "txt" | "html") => {
+    const fileSlug = labTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     const body =
       type === "html"
         ? `<!doctype html><html><head><meta charset="utf-8"><title>${labTitle}</title></head><body><pre>${reportText
@@ -94,7 +109,7 @@ export function LabReport({
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `newtons-laws-lab-report.${type}`;
+    link.download = `${fileSlug || "lab"}-report.${type}`;
     link.click();
     URL.revokeObjectURL(url);
   };

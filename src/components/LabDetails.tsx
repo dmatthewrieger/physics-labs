@@ -7,7 +7,32 @@ interface LabDetailsProps {
   onChooseMode: () => void;
 }
 
+const labPaths: Record<string, string[]> = {
+  "newtons-laws": [
+    "1. Introduction and learning objectives",
+    "2. Newton's First Law: inertia and net force",
+    "3. Newton's Second Law: force, mass, and acceleration",
+    "4. Newton's Third Law: action and reaction",
+    "5. Final reflection and lab report",
+  ],
+  "one-dimensional-kinematics": [
+    "1. Introduction and learning objectives",
+    "2. Constant velocity: position-time slope and displacement",
+    "3. Constant acceleration: velocity-time slope and changing position",
+    "4. Graph analysis: signs, slopes, areas, and turn-around motion",
+    "5. Final reflection and lab report",
+  ],
+};
+
 export function LabDetails({ lab, onBack, onChooseMode }: LabDetailsProps) {
+  const pathItems = labPaths[lab.id] ?? [
+    "1. Introduction",
+    "2. Guided simulation",
+    "3. Data and graphs",
+    "4. Reflection",
+    "5. Lab report",
+  ];
+
   return (
     <main className="min-h-screen bg-paper">
       <div className="mx-auto max-w-6xl px-5 py-8">
@@ -62,11 +87,9 @@ export function LabDetails({ lab, onBack, onChooseMode }: LabDetailsProps) {
                   <h2 className="text-lg font-black text-ink">Lab Path</h2>
                 </div>
                 <ol className="space-y-3 text-sm leading-6 text-slate-600">
-                  <li>1. Introduction and learning objectives</li>
-                  <li>2. Newton's First Law: inertia and net force</li>
-                  <li>3. Newton's Second Law: force, mass, and acceleration</li>
-                  <li>4. Newton's Third Law: action and reaction</li>
-                  <li>5. Final reflection and lab report</li>
+                  {pathItems.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
                 </ol>
               </div>
             </div>

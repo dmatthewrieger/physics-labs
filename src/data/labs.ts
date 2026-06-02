@@ -18,9 +18,11 @@ export const labs: LabMetadata[] = [
     id: "one-dimensional-kinematics",
     title: "One-Dimensional Kinematics Lab",
     shortTitle: "1D Kinematics",
-    description: "Analyze position, velocity, and acceleration in straight-line motion.",
-    topics: ["Kinematics", "Graphs"],
-    status: "coming-soon",
+    description:
+      "Analyze position, velocity, acceleration, slopes, and graph areas for objects moving along a straight line.",
+    topics: ["Kinematics", "Graphs", "Motion"],
+    status: "available",
+    estimatedTimeMinutes: 60,
     modes: ["algebra-trig", "calculus"],
   },
   {

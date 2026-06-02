@@ -2,13 +2,13 @@
 
 Interactive simulations and guided virtual labs for online college physics courses.
 
-This repository is a production-ready prototype for a GitHub-hosted physics lab library. It includes reusable lab infrastructure and fully implements the first available lab: **Newton's Laws Virtual Lab**.
+This repository is a production-ready prototype for a GitHub-hosted physics lab library. It includes reusable lab infrastructure and currently implements **Newton's Laws Virtual Lab** and **One-Dimensional Kinematics Lab**.
 
 ## Project Overview
 
 The app is designed as a client-side Vite/React application that can be deployed to GitHub Pages. It gives students a lab-library entry point, a lab details page, course-level mode selection, guided experiments, embedded assessment, graphs, data tables, and a client-side lab report.
 
-## Current Implemented Lab
+## Current Implemented Labs
 
 **Newton's Laws Virtual Lab** includes:
 
@@ -20,11 +20,19 @@ The app is designed as a client-side Vite/React application that can be deployed
 - Mode-specific questions, feedback, and report language
 - Animated simulations, graph panels, data tables, and a final reflection
 
+**One-Dimensional Kinematics Lab** includes:
+
+- Constant velocity trials with position-time and velocity-time graphs
+- Constant acceleration trials with position, velocity, and acceleration graphs
+- Graph-analysis scenarios for slowing down, speeding up, and turn-around motion
+- Algebra/trig-based and calculus-based modes
+- Prediction questions before each experiment
+- Data tables, graph interpretation prompts, final reflection, and lab report output
+
 ## Future Lab Library Vision
 
 The library page already includes placeholder cards for:
 
-- One-Dimensional Kinematics Lab
 - Projectile Motion Lab
 - Work and Energy Lab
 - Conservation of Momentum Lab
