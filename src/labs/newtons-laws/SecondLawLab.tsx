@@ -145,6 +145,8 @@ export function SecondLawLab({
   };
 
   const displayPosition = Math.max(0.04, Math.min(0.94, sim.position / 22 + 0.06));
+  const predictionQuestions = questions.filter((question) => question.type === "prediction");
+  const analysisQuestions = questions.filter((question) => question.type !== "prediction");
 
   const modeCopy =
     mode === "algebra-trig"
@@ -183,7 +185,26 @@ export function SecondLawLab({
           </div>
         </article>
 
-        <div className="lab-panel rounded-lg p-5">
+        <div className="space-y-3">
+          <div className="lab-panel rounded-lg p-5">
+            <p className="text-sm font-black uppercase tracking-wide text-ember">Before You Experiment</p>
+            <h3 className="mt-2 text-xl font-black text-ink">Prediction</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Submit your prediction before running a cart trial or collecting data.
+            </p>
+          </div>
+          {predictionQuestions.map((question) => (
+            <QuestionCard
+              key={question.id}
+              question={question}
+              response={responses[question.id]}
+              onSubmit={onSubmitResponse}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="lab-panel rounded-lg p-5">
           <div className="grid gap-4 md:grid-cols-2">
             <label>
               <span className="control-label">Cart mass: {mass.toFixed(1)} kg</span>
@@ -265,7 +286,6 @@ export function SecondLawLab({
             <Readout label="Acceleration" value={`${currentPhysics.acceleration.toFixed(2)} m/s^2`} />
             <Readout label="Friction" value={`${currentPhysics.frictionForce.toFixed(2)} N`} />
           </div>
-        </div>
       </div>
 
       <SimulationCanvas
@@ -376,7 +396,7 @@ export function SecondLawLab({
 
       <div className="space-y-3">
         <h3 className="text-xl font-black text-ink">Analysis Questions</h3>
-        {questions.map((question) => (
+        {analysisQuestions.map((question) => (
           <QuestionCard
             key={question.id}
             question={question}

@@ -60,13 +60,14 @@ export function SimulationCanvas({ title, carts, arrows = [] }: SimulationCanvas
             <marker
               key={arrow.id}
               id={`arrow-${arrow.id}`}
-              markerWidth="12"
-              markerHeight="12"
-              refX="10"
-              refY="6"
+              markerUnits="userSpaceOnUse"
+              markerWidth="9"
+              markerHeight="9"
+              refX="8"
+              refY="4.5"
               orient="auto"
             >
-              <path d="M2,2 L10,6 L2,10 Z" fill={arrow.color} />
+              <path d="M1,1 L8,4.5 L1,8 Z" fill={arrow.color} />
             </marker>
           ))}
         </defs>
@@ -84,7 +85,7 @@ export function SimulationCanvas({ title, carts, arrows = [] }: SimulationCanvas
                 y1={y}
                 y2={y}
                 stroke={arrow.color}
-                strokeWidth="6"
+                strokeWidth="4.5"
                 strokeLinecap="round"
                 markerEnd={`url(#arrow-${arrow.id})`}
               />

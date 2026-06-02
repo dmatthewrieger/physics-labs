@@ -114,6 +114,9 @@ export function FirstLawLab({ mode, questions, responses, onSubmitResponse, data
     return wrapped / 12;
   }, [sim.position]);
 
+  const predictionQuestions = questions.filter((question) => question.type === "prediction");
+  const analysisQuestions = questions.filter((question) => question.type !== "prediction");
+
   const modeCopy =
     mode === "algebra-trig"
       ? {
@@ -153,78 +156,96 @@ export function FirstLawLab({ mode, questions, responses, onSubmitResponse, data
           </div>
         </article>
 
-        <div className="lab-panel rounded-lg p-5">
-          <div className="grid gap-4 md:grid-cols-2">
-            <label>
-              <span className="control-label">Initial velocity: {initialVelocity.toFixed(1)} m/s</span>
-              <input
-                type="range"
-                min="-4"
-                max="4"
-                step="0.1"
-                value={initialVelocity}
-                onChange={(event) => setInitialVelocity(Number(event.target.value))}
-                className="range-field mt-2"
-              />
-            </label>
-
-            <label className="flex items-center justify-between gap-3 rounded-md border border-slate-200 bg-slate-50 px-3 py-3">
-              <span className="control-label">Friction</span>
-              <input
-                type="checkbox"
-                checked={frictionEnabled}
-                onChange={(event) => setFrictionEnabled(event.target.checked)}
-                className="h-5 w-5 accent-marine"
-              />
-            </label>
-
-            <label className={frictionEnabled ? "" : "opacity-45"}>
-              <span className="control-label">Friction strength: {frictionStrength.toFixed(1)} N</span>
-              <input
-                type="range"
-                min="0"
-                max="3"
-                step="0.1"
-                value={frictionStrength}
-                disabled={!frictionEnabled}
-                onChange={(event) => setFrictionStrength(Number(event.target.value))}
-                className="range-field mt-2"
-              />
-            </label>
-
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => setRunning((value) => !value)}
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-ink px-3 py-2 text-sm font-bold text-white hover:bg-marine"
-              >
-                {running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                {running ? "Pause" : "Start"}
-              </button>
-              <button
-                type="button"
-                onClick={applyPush}
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-700 hover:border-ember hover:text-ember"
-              >
-                <Send className="h-4 w-4" />
-                Push
-              </button>
-              <button
-                type="button"
-                onClick={reset}
-                className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-700 hover:border-marine hover:text-marine"
-              >
-                <RotateCcw className="h-4 w-4" />
-                Reset
-              </button>
-            </div>
+        <div className="space-y-3">
+          <div className="lab-panel rounded-lg p-5">
+            <p className="text-sm font-black uppercase tracking-wide text-ember">Before You Experiment</p>
+            <h3 className="mt-2 text-xl font-black text-ink">Prediction</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Submit your prediction before starting the cart or applying the push.
+            </p>
           </div>
+          {predictionQuestions.map((question) => (
+            <QuestionCard
+              key={question.id}
+              question={question}
+              response={responses[question.id]}
+              onSubmit={onSubmitResponse}
+            />
+          ))}
+        </div>
+      </div>
 
-          <div className="mt-5 grid gap-3 sm:grid-cols-3">
-            <Readout label="Position" value={`${sim.position.toFixed(2)} m`} />
-            <Readout label="Velocity" value={`${sim.velocity.toFixed(2)} m/s`} />
-            <Readout label="Net force" value={`${sim.netForce.toFixed(2)} N`} />
+      <div className="lab-panel rounded-lg p-5">
+        <div className="grid gap-4 md:grid-cols-2">
+          <label>
+            <span className="control-label">Initial velocity: {initialVelocity.toFixed(1)} m/s</span>
+            <input
+              type="range"
+              min="-4"
+              max="4"
+              step="0.1"
+              value={initialVelocity}
+              onChange={(event) => setInitialVelocity(Number(event.target.value))}
+              className="range-field mt-2"
+            />
+          </label>
+
+          <label className="flex items-center justify-between gap-3 rounded-md border border-slate-200 bg-slate-50 px-3 py-3">
+            <span className="control-label">Friction</span>
+            <input
+              type="checkbox"
+              checked={frictionEnabled}
+              onChange={(event) => setFrictionEnabled(event.target.checked)}
+              className="h-5 w-5 accent-marine"
+            />
+          </label>
+
+          <label className={frictionEnabled ? "" : "opacity-45"}>
+            <span className="control-label">Friction strength: {frictionStrength.toFixed(1)} N</span>
+            <input
+              type="range"
+              min="0"
+              max="3"
+              step="0.1"
+              value={frictionStrength}
+              disabled={!frictionEnabled}
+              onChange={(event) => setFrictionStrength(Number(event.target.value))}
+              className="range-field mt-2"
+            />
+          </label>
+
+          <div className="grid grid-cols-3 gap-2">
+            <button
+              type="button"
+              onClick={() => setRunning((value) => !value)}
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-ink px-3 py-2 text-sm font-bold text-white hover:bg-marine"
+            >
+              {running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              {running ? "Pause" : "Start"}
+            </button>
+            <button
+              type="button"
+              onClick={applyPush}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-700 hover:border-ember hover:text-ember"
+            >
+              <Send className="h-4 w-4" />
+              Push
+            </button>
+            <button
+              type="button"
+              onClick={reset}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-700 hover:border-marine hover:text-marine"
+            >
+              <RotateCcw className="h-4 w-4" />
+              Reset
+            </button>
           </div>
+        </div>
+
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <Readout label="Position" value={`${sim.position.toFixed(2)} m`} />
+          <Readout label="Velocity" value={`${sim.velocity.toFixed(2)} m/s`} />
+          <Readout label="Net force" value={`${sim.netForce.toFixed(2)} N`} />
         </div>
       </div>
 
@@ -293,7 +314,7 @@ export function FirstLawLab({ mode, questions, responses, onSubmitResponse, data
 
       <div className="space-y-3">
         <h3 className="text-xl font-black text-ink">Analysis Questions</h3>
-        {questions.map((question) => (
+        {analysisQuestions.map((question) => (
           <QuestionCard
             key={question.id}
             question={question}

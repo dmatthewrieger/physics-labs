@@ -122,6 +122,8 @@ export function ThirdLawLab({ mode, questions, responses, onSubmitResponse, data
   const accelerationA = -sim.force / massA;
   const accelerationB = sim.force / massB;
   const totalMomentum = massA * sim.velocityA + massB * sim.velocityB;
+  const predictionQuestions = questions.filter((question) => question.type === "prediction");
+  const analysisQuestions = questions.filter((question) => question.type !== "prediction");
 
   const fbdA: ForceVector[] = [
     { label: "B on A", direction: "left", magnitude: forceMagnitude / 4, color: "#be123c" },
@@ -160,7 +162,26 @@ export function ThirdLawLab({ mode, questions, responses, onSubmitResponse, data
           </div>
         </article>
 
-        <div className="lab-panel rounded-lg p-5">
+        <div className="space-y-3">
+          <div className="lab-panel rounded-lg p-5">
+            <p className="text-sm font-black uppercase tracking-wide text-ember">Before You Experiment</p>
+            <h3 className="mt-2 text-xl font-black text-ink">Prediction</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Submit your prediction before releasing the spring-loaded carts.
+            </p>
+          </div>
+          {predictionQuestions.map((question) => (
+            <QuestionCard
+              key={question.id}
+              question={question}
+              response={responses[question.id]}
+              onSubmit={onSubmitResponse}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="lab-panel rounded-lg p-5">
           <div className="grid gap-4 md:grid-cols-3">
             <label>
               <span className="control-label">Mass A: {massA.toFixed(1)} kg</span>
@@ -225,7 +246,6 @@ export function ThirdLawLab({ mode, questions, responses, onSubmitResponse, data
             <Readout label="v_A / v_B" value={`${sim.velocityA.toFixed(2)} / ${sim.velocityB.toFixed(2)} m/s`} />
             <Readout label="Total p" value={`${totalMomentum.toFixed(3)} kg m/s`} />
           </div>
-        </div>
       </div>
 
       <SimulationCanvas
@@ -317,7 +337,7 @@ export function ThirdLawLab({ mode, questions, responses, onSubmitResponse, data
 
       <div className="space-y-3">
         <h3 className="text-xl font-black text-ink">Analysis Questions</h3>
-        {questions.map((question) => (
+        {analysisQuestions.map((question) => (
           <QuestionCard
             key={question.id}
             question={question}
